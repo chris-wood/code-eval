@@ -1,0 +1,24 @@
+import sys
+
+with open(sys.argv[1], "r") as fh:
+    n = int(fh.readline())
+    
+    lines = {} # map line length to list of lines
+    for line in fh:
+        line = line.strip()
+        size = len(line)
+        if size in lines:
+            lines[size].append(line)
+        else:
+            lines[size] = [line]
+
+    count = 0
+    for size in sorted(lines.iterkeys(), reverse=True):
+        for line in lines[size]:
+            print line
+            count += 1
+
+            if count == n:
+                break
+        if count == n:
+            break
